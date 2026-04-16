@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
+import { cn } from '@/lib/utils';
 import './globals.css';
-import Navbar from '@/components/Navbar';
+
+import DarkVeil from '@/components/DarkVeil';
+import { Header } from '@/components/header';
 
 const jetbrainsMono = JetBrains_Mono({
   variable: '--font-jetbrains-mono',
@@ -21,9 +24,27 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${jetbrainsMono.variable} h-full antialiased dark`}>
-        <div className="min-h-screen">
-          <Navbar />
-          {children}
+        <div className="absolute inset-0 z-[-1] min-h-screen">
+          <DarkVeil
+            hueShift={0}
+            noiseIntensity={0}
+            scanlineIntensity={0}
+            speed={0.5}
+            scanlineFrequency={0}
+            warpAmount={0}
+          />
+        </div>
+        <div className="relative flex min-h-screen flex-col overflow-hidden px-4 supports-[overflow:clip]:overflow-clip">
+          <Header />
+          <main
+            className={cn(
+              'relative mx-auto max-w-4xl grow',
+              'before:absolute before:-inset-y-14 before:-left-px before:w-px before:bg-border',
+              'after:absolute after:-inset-y-14 after:-right-px after:w-px after:bg-border'
+            )}
+          >
+            {children}
+          </main>
         </div>
       </body>
     </html>
