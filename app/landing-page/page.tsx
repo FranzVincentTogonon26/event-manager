@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ArrowRightIcon, PhoneCallIcon } from 'lucide-react';
 
-export function HeroSection() {
+export default function LandingPage() {
   return (
     <section>
       <div className="relative flex flex-col items-center justify-center gap-5 px-4 py-12 md:px-4 md:py-24 lg:py-28">

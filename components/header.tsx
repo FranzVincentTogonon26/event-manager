@@ -1,8 +1,11 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { useScroll } from '@/hooks/use-scroll';
-import { Button } from '@/components/ui/button';
 import { MobileNav } from '@/components/mobile-nav';
+
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import LoginPage from '@/app/auth/login/page';
 
 export const navLinks = [
   {
@@ -44,7 +47,28 @@ export function Header() {
           className="rounded-md p-2 hover:bg-muted dark:hover:bg-muted/50"
           href="#"
         >
-          <div className="font-bold">Event Planner</div>
+          <div className="flex justify-center items-center gap-2">
+            <svg
+              width="30"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="24" height="24" rx="6" fill="#111827" />
+
+              <path
+                d="M7 6H13C15.2 6 17 7.8 17 10C17 12.2 15.2 14 13 14H7V6Z"
+                stroke="#60A5FA"
+                strokeWidth={2}
+                fill="none"
+              />
+
+              <path d="M7 14V18" stroke="#60A5FA" strokeWidth={2} />
+
+              <circle cx="18" cy="6" r="2" fill="#F59E0B" />
+            </svg>
+            <span className="font-semibold">Event Planner</span>
+          </div>
         </a>
         <div className="hidden items-center gap-2 md:flex">
           <div>
@@ -54,10 +78,21 @@ export function Header() {
               </Button>
             ))}
           </div>
-          <Button size="sm" variant="outline">
-            Sign In
-          </Button>
-          <Button size="sm">Get Started</Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm" variant="outline">
+                Sign In
+              </Button>
+            </DialogTrigger>
+            <LoginPage tab="sign-in" />
+          </Dialog>
+
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button size="sm">Get Started</Button>
+            </DialogTrigger>
+            <LoginPage tab="sign-up" />
+          </Dialog>
         </div>
         <MobileNav />
       </nav>
